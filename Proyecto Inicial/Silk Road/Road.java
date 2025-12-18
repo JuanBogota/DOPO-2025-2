@@ -1,42 +1,36 @@
-
 /**
- * Write a description of class Road here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Class Road - represents a road segment in the Silk Road simulation.
+ * @author Juan Daniel Bogota Fuentes
+ * @author Nicolas Felipe Bernal Gallo
+ * @version 1.0
  */
-public class Road
-{
-    private Rectangle sizeStreet;
-    private Rectangle sizePlatform;
+public class Road{
+
+
+    private Rectangle street;
     private int xPosition;
     private int yPosition;
     private boolean isVisible;
 
     /**
-     * Constructor for objects of class Road
+     * Constructor for objects of class Road with corner option
      */
-    public Road()
-    {
-        this.xPosition = xPosition;
-        this.yPosition = yPosition;
-        isVisible = false;
-        sizeStreet = new Rectangle(70,35);
-        sizePlatform = new Rectangle(70, 15);
-        sizeStreet.changeSize(30, 40);
-        sizeStreet.changeColor("black");
-        sizePlatform.changeSize(20, 40);
-        sizePlatform.changeColor("gray");
+    public Road(){
+        street = new Rectangle(40, 15);
+        street.changeSize(40, 40);
+        street.changeColor("gray");
+        int streetHeight = street.getHeight();
+        int streetWidth = street.getWidth();
+        int streetXPosition = street.getXPosition();
+        int streetYPosition = street.getYPosition();
     }
-
-
+        
     /**
      * Draw the road with the specified parameters
      */
     private void draw() {
         if(isVisible) {
-            sizeStreet.makeVisible();
-            sizePlatform.makeVisible();
+            street.makeVisible();
         }
     }
 
@@ -45,8 +39,7 @@ public class Road
      */
     private void erase() {
         if(isVisible) {
-            sizeStreet.makeInvisible();
-            sizePlatform.makeInvisible();
+            street.makeInvisible();
         }
     }
 
@@ -70,16 +63,8 @@ public class Road
      * Returns the rectangle representing the platform size.
      * @return the platform size
      */
-    public Rectangle getSizeStreet() {
-        return sizeStreet;
-    }
-
-    /**
-     * Returns the rectangle representing the street size.
-     * @return the street size
-     */    
-    public Rectangle getSizePlatform() {
-        return sizePlatform;
+    public Rectangle getStreet() {
+        return street;
     }
 
     /**
@@ -89,8 +74,7 @@ public class Road
     public void moveVertical(int distance) {
         erase();
         yPosition += distance;
-        sizeStreet.moveVertical(distance);
-        sizePlatform.moveVertical(distance);
+        street.moveVertical(distance);
         draw();
     }
 
@@ -101,8 +85,20 @@ public class Road
     public void moveHorizontal(int distance) {
         erase();
         xPosition += distance;
-        sizeStreet.moveHorizontal(distance);
-        sizePlatform.moveHorizontal(distance);
+        street.moveHorizontal(distance);
+        draw();
+    }
+
+
+    /**
+     * Rotate the road to change its orientation.
+     */
+    public void rotateRoad(){
+        erase();
+        int streetHeight = street.getHeight();
+        int streetWidth = street.getWidth();
+        int streetXPosition = street.getXPosition();
+        int streetYPosition = street.getYPosition();
         draw();
     }
 }

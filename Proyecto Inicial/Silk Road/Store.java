@@ -1,10 +1,6 @@
-import java.util.List;
-import java.util.Collections;
-import java.util.Comparator;
 
 /**
- * Clase que representa una tienda en la Ruta de la Seda
- * Maneja la ubicación, cantidad de tenges y representación visual
+ * Class Store represents a store in the Silk Road simulation.
  * 
  * @author Nicolas Felipe Bernal Gallo
  * @author Juan Daniel Bogota Fuentes
@@ -16,21 +12,60 @@ public class Store{
     private int tenges;
     private boolean isVisible;
     private String color;
-    private int initialPosition;
     private int initialTenges;
     private Rectangle size;
     
     /**
-     * Constructor de la tienda
-     * 
-     * @param initialPosition Posición inicial de la tienda en la ruta
-     * @param initialTenges Cantidad inicial de tenges en la tienda
+     * Constructor of the Store class.
+     * @param position Initial position of the store
+     * @param initialTenges Initial amount of tenges in the store
      */
-    public Store(int initialPosition, int initialTenges){
-        this.size = new Rectangle(initialPosition, 20);
-        this.size.makeVisible();
-        this.location = initialPosition;
+    public Store(int position, int initialTenges){
+        this.location = position;
         this.tenges = initialTenges;
+        this.color = "green";
+        this.size = new Rectangle(position, 20);
+        this.size.changeSize(10, 10);
+        this.size.makeVisible();
+    }
+
+    /**
+     * Empties the store of all tenges.
+     */
+    public void empty(){
+        this.tenges = 0;
+        changeColor("gray");
+    }
+
+    public void changeColor(String newColor){
+        this.color = newColor;
+        this.size.changeColor(newColor);
+    }
+    
+    /**
+     * Resupplies the store with 100 additional tenges.
+     */
+    public void resupply() throws SilkRoadException {
+        if(this.tenges != initialTenges){
+            throw new SilkRoadException(SilkRoadException.FAILDED_RESUPPLY);
+        }
+        this.tenges = initialTenges;
+    }
+
+    /**
+     * Make this store invisible.
+     */
+    public void makeInvisible(){
+        size.makeInvisible();
+        isVisible = false;
+    }
+
+    /**
+     * Make this store visible.
+     */
+    public void makeVisible(){
+        size.makeVisible();
+        isVisible = true;
     }
 
     /**
@@ -50,32 +85,36 @@ public class Store{
     }
 
     /**
-     * Resupplies the store with 100 additional tenges.
+     * Returns the initial amount of tenges in the store.
+     * @return the initial amount of tenges
      */
-    public void resupply(){
-        this.tenges += 100;
+    public int getInitialTenges(){
+        return initialTenges;
     }
 
     /**
-     * Make this store invisible.
+     * Returns the color of the store.
+     * @return the color of the store
      */
-    public void makeInvisible(){
-        size.makeInvisible();
-        isVisible = false;
+    public String getColor(){
+        return color;
     }
 
+    /**
+     * Determines if a robot can take tenges from this store.
+     * @param robot the robot trying to take tenges
+     * @return false by default, to be overridden in subclasses
+     */
+    public boolean canRobotTake(Robot robot) {
+        return false;
+    }
 
-    public static void ordenarStores(Store[] stores) {
-        int n = stores.length;
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < n - i - 1; j++) {
-                if (stores[j].getLocation() > stores[j + 1].getLocation()) {
-                    Store temp = stores[j];
-                    stores[j] = stores[j + 1];
-                    stores[j + 1] = temp;
-                    }
-                }
-            }
+    /**
+     * Returns the type of the store.
+     * @return the type of the store
+     */
+    public String getType() {
+        return "normal";
     }
 }   
 
