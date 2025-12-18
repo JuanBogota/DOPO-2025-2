@@ -16,3 +16,6 @@ bluej.pkg
 
 #Carpeta doc que no se debe subir
 doc/
+bin/
+.settings/
+.vscode/
