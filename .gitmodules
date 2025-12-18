@@ -1,3 +1,6 @@
 [submodule "ProyectoFinal"]
 	path = ProyectoFinal
 	url = https://github.com/JuanBogota/Proyecto-Final-DOPO.git
+[submodule "Proyecto Inicial"]
+	path = Proyecto Inicial
+	url = https://github.com/JuanBogota/Proyecto-Inicial-DOPO.git
