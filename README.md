@@ -40,3 +40,12 @@ A lo largo del curso se trabajan conceptos como:
 - Modelado con UML
 - Buenas prácticas de programación
 - Organización y versionamiento de proyectos con Git
+
+---
+
+## ✍️ Autor
+
+**Juan Bogotá**  
+Estudiante de Ingeniería de Sistemas  
+Asignatura: Desarrollo Orientado por Objetos
+Periodo académico: 2025-2
